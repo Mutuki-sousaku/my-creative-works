@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>MUTUKI ORIGINAL CREATIVE WORKS</title>
+    <style>
+        /* フォント設定 */
+        @font-face {
+            font-family: '叛逆明朝';
+            src: local('叛逆明朝'), local('HangyakuMincho');
+        }
+
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-gray: #c0cacf;
+            --text-color: #d4d4d4;
+            --gold: #b8860b;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: '叛逆明朝', 'Sawarabi Mincho', serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* 背景装飾 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 20%, #000 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        header, section {
+            position: relative;
+            z-index: 20;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* 1. 自己紹介ページ（ホーム） */
+        #home {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            text-shadow: 2px 2px 10px rgba(184, 134, 11, 0.5);
+            margin-bottom: 50px;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-icons a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-icons a:hover {
+            color: var(--accent-red);
+            transform: scale(1.1);
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--gold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            transform: rotate(45deg);
+        }
+
+        .icon-box span {
+            transform: rotate(-45deg);
+        }
+
+        /* 2. キャラクター紹介ページ */
+        h2 {
+            font-size: 2.5rem;
+            border-left: 5px solid var(--accent-red);
+            padding-left: 20px;
+            margin-bottom: 40px;
+            color: var(--accent-red);
+        }
+
+        h3 {
+            color: var(--gold);
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 5px;
+            margin-top: 60px;
+        }
+
+        .char-grid {
+            display: grid !important;
+            /* 画面が広いときは「1対1」の2列、狭いときは1列にする設定 */
+            grid-template-columns: 1fr 1fr !important; 
+            gap: 30px !important;
+            width; 100% !important;
+        }
+
+        /* スマホで見るときは1列にしたい場合（レスポンシブ対応） */
+        @media (max-width: 768px) {
+            .char-grid {
+               grid-template-columns: 1fr;
+            }
+        }
+
+        .char-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 2px;
+            transition: 0.3s;
+            width: auto;
+        }
+
+        .char-card:hover {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 15px rgba(128, 0, 0, 0.3);
+        }
+
+        .char-img {
+            width: 100%;
+            height: auto;      /* 高さを固定しない */
+            display: block;    /* ブロック要素にする */
+            line-height: 0;    /* 隙間を殺す */
+            background: none;  /* 背景の黒を消す */
+            border: 1px solid var(--gold);
+            margin-bottom: 0;  /* 下の余白をゼロにする */
+        }
+
+        .char-img img {
+            display: block;    /* 画像自体の隙間を消す */
+            width: 100%;
+            height: auto;
+        }
+
+        .char-info {
+            font-size: 0.9rem;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+
+        .char-info dt { color: var(--gold); font-weight: bold; margin-top: 5px; }
+        .char-info dd { margin-left: 0; margin-bottom: 5px; border-bottom: 1px dotted #333; }
+
+        .desc-text {
+            font-size: 0.85rem;
+            margin-top: 15px;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        /* 3. 祈望のアリス ページ */
+        #alice {
+            text-align: center;
+            padding-bottom: 150px;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.4s;
+            margin-top: 30px;
+        }
+
+        .link-button:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        hr { border: 0; border-top: 1px solid #333; margin: 100px 0; }
+    </style>
+</head>
+<body>
+
+    <header id="home">
+        <h1>MUTUKI ORIGINAL <br> CREATIVE WORKS WEBSITE</h1>
+        <div class="nav-icons">
+            <a href="#character">
+                <div class="icon-box"><span>♰</span></div>
+                CHARACTER
+            </a>
+            <a href="#alice">
+                <div class="icon-box"><span>✙</span></div>
+                祈望のアリス
+            </a>
+        </div>
+    </header>
+
+    <hr>
+
+    <section id="character">
+        <h2>CHARACTER</h2>
+
+        <h3>Main Characters I</h3>
+        <div class="char-grid">
+            <div class="char-card">
+                <div class="char-img">
+                   <img src="Alice.png" alt="アリス・ベル" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>アリス・ベル</dd>
+                    <dt>・AGE</dt><dd>16</dd>
+                    <dt>・HEIGHT</dt><dd>149cm</dd>
+                    <dt>・WEIGHT</dt><dd>40kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>3.29</dd>
+                </dl>
+                <p class="desc-text">稀有な生まれから軍から狙われている少女。素肌に触れると人の感情が読めるが、そのせいでトラウマを抱えており人間不信な面がある。素は純粋な性格。</p>
+            </div>
+            <div class="char-card">
+                <div class="char-img">
+                   <img src="Sei.png" alt="水篠清" style="width:100%; height:auto; display:block;">
+　　　　　　　 </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>水篠 清</dd>
+                    <dt>・AGE</dt><dd>23</dd>
+                    <dt>・HEIGHT</dt><dd>185cm</dd>
+                    <dt>・WEIGHT</dt><dd>65kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>12.29</dd>
+                </dl>
+                <p class="desc-text">皇軍少佐。国家の秘密警察にあたる任務を行う秘匿任務隊の壱班隊長。軍人の家系である水篠家長男に生まれ厳しい環境で育った。合理主義者。腹違いの弟がいる。</p>
+            </div>
+        </div>
+<h3>Main Characters II</h3>
+        <div class="char-grid">
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="Raphael.png" alt="ラファエル・シモン" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>ラファエル・シモン</dd>
+                    <dt>・AGE</dt><dd>19</dd>
+                    <dt>・HEIGHT</dt><dd>187cm</dd>
+                    <dt>・WEIGHT</dt><dd>61kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>1.4</dd>
+                </dl>
+                <p class="desc-text">聖書による魔法で戦う神官。名家シモン家の長男。神官学校を首席で卒業しているエリート。吸血鬼リュカの討伐を任じられるが敗北し捕虜となる。一歳上の姉がいる。</p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="Lucas.png" alt="リュカ・ミィシェーレ" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>リュカ・ミィシェーレ</dd>
+                    <dt>・AGE</dt><dd>124</dd>
+                    <dt>・HEIGHT</dt><dd>190cm</dd>
+                    <dt>・WEIGHT</dt><dd>67kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>8.3</dd>
+                </dl>
+                <p class="desc-text">吸血鬼。戦闘能力は軍事兵器レベルであり、危険性から約100年間政府に狙われている。幼少期～青年期のトラウマで精神的に不安定。妹やレネーには優しい。</p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="Sarah.png" alt="サラ・ミィシェーレ" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>サラ・ミィシェーレ</dd>
+                    <dt>・AGE</dt><dd>119</dd>
+                    <dt>・HEIGHT</dt><dd>155cm</dd>
+                    <dt>・WEIGHT</dt><dd>43kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>7.25</dd>
+                </dl>
+                <p class="desc-text">吸血鬼。リュカの妹。幼いころから自分を守ってくれた兄を常に心配しているためラファエルを非常に敵視している。レネーには甘えている分消えてしまうことに怯えている。</p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="Renee.png" alt="レネー・ポミエ" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>レネー・ポミエ</dd>
+                    <dt>・AGE</dt><dd>享年38 外見年齢18</dd>
+                    <dt>・HEIGHT</dt><dd>158cm</dd>
+                    <dt>・WEIGHT</dt><dd>44kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>11.10</dd>
+                </dl>
+                <p class="desc-text">ミィシェーレ家に伝統的に仕えるポミエ家出身のメイド。幼いリュカたちを守り今の城まで逃げてきたが亡くなる。10年後に特殊な幽体として現れるが、100年以上経った今存在の継続が限界に近い。</p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="Celine.png" alt="セリーヌ・シモン" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>セリーヌ・シモン</dd>
+                    <dt>・AGE</dt><dd>20</dd>
+                    <dt>・HEIGHT</dt><dd>165cm</dd>
+                    <dt>・WEIGHT</dt><dd>49kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>1.1</dd>
+                </dl>
+                <p class="desc-text">最高位の神官。アルビノであることからシモン家では生神として育てられた。セリーヌ自身も自分を尊い存在だと思っている。弟のラファエルが捕虜となったことでリュカ討伐を任じられる。</p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="Louis.png" alt="ルイ・トレーズ" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>ルイ・トレーズ</dd>
+                    <dt>・AGE</dt><dd>25</dd>
+                    <dt>・HEIGHT</dt><dd>191cm</dd>
+                    <dt>・WEIGHT</dt><dd>66kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>4.2</dd>
+                </dl>
+                <p class="desc-text">セリーヌの部下の軍人。セリーヌを崇拝している。元は好青年だったが自分が強化人間実験によって生まれたことを知ったことなどにより狂人になった。実験用個体識別番号は「13-L」</p>
+            </div>
+        </div>
+        <h3>Main Characters III</h3>
+        <div class="char-grid">
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="Versus.png" alt="フェアルス・D・エアレーズング" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>フェアルス・D・エアレーズング</dd>
+                    <dt>・AGE</dt><dd>205</dd>
+                    <dt>・HEIGHT</dt><dd>186cm</dd>
+                    <dt>・WEIGHT</dt><dd>60kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>3.1(？)</dd>
+                </dl>
+                <p class="desc-text">魔法生物学の科学者。幼馴染のリーリエを蘇らせるためならば何でもする。自らに人体改造を行うことでこの年齢まで生きている。元孤児であり、エアレーズング家の養子になってからはリーリエと同じ誕生日を名乗っている。</p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="lilie.png" alt="リーリエ・エアレーズング" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>リーリエ・エアレーズング</dd>
+                    <dt>・AGE</dt><dd>享年17</dd>
+                    <dt>・HEIGHT</dt><dd>152cm</dd>
+                    <dt>・WEIGHT</dt><dd>42kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>3.1</dd>
+                </dl>
+                <p class="desc-text">名家エアレーズング家の一人娘。天真爛漫な性格。フェアルスの２歳上。姉としてではなく幼馴染としてフェアルスに接していた。戦火に巻き込まれ亡くなった。</p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="No232.png" alt="リーリエ(No.232)" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>リーリエ(No.232)</dd>
+                    <dt>・AGE</dt><dd>9</dd>
+                    <dt>・HEIGHT</dt><dd>131cm</dd>
+                    <dt>・WEIGHT</dt><dd>30kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>7.5</dd>
+                </dl>
+                <p class="desc-text">フェアルスによって作られたリーリエのクローンの232番目の個体。フェアルスに「リーリエ」を演じることを強いられている。いつフェアルスに処分されるのか常に怯えている。</p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="Licht.png" alt="リヒト・ファルズフ" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>リヒト・ファルズフ</dd>
+                    <dt>・AGE</dt><dd>？</dd>
+                    <dt>・HEIGHT</dt><dd>191cm</dd>
+                    <dt>・WEIGHT</dt><dd>？</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>？</dd>
+                </dl>
+                <p class="desc-text">小児科医。可哀想なものが大好きで幼女に執着している。最近はディアナがお気に入り。堕天使であるため人としての感情や倫理観が欠如している。人間に擬態するためフェアルスと取引している。</p>
+            </div>
+
+            <div class="char-card">
+                <div class="char-img">
+                    <img src="Diana.png" alt="ディアナ・レツトグリュク" style="width:100%; height:auto; display:block;">
+                </div>
+                <dl class="char-info" style="margin-top: 0; padding-top: 15px;">
+                    <dt>・NAME</dt><dd>ディアナ・レツトグリュク</dd>
+                    <dt>・AGE</dt><dd>12</dd>
+                    <dt>・HEIGHT</dt><dd>145cm</dd>
+                    <dt>・WEIGHT</dt><dd>37kg</dd>
+                    <dt>・DATE OF BIRTH</dt><dd>10.29</dd>
+                </dl>
+                <p class="desc-text">リヒトの担当患者。死病を患っており余命１年もない。富豪の娘だが親に見捨てられており、唯一寄り添ってくれるリヒトに恋をしている。リヒトが人でないことに気付いている。</p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="alice">
+        <h2>祈望のアリス</h2>
+        <p>COMIC</p>
+        <a href="https://poipiku.com/13360563/12881473.html " class="link-button" target="_blank">♰ Episode 1</a>
+    </section>
+
+    <footer>
+        <p style="text-align: center; color: #444; padding-bottom: 30px;">&copy; 2026 MUTUKI CREATIVE WORKS</p>
+    </footer>
+
+</body>
+</html>
