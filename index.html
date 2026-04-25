@@ -114,21 +114,30 @@
             padding-bottom: 5px;
             margin-top: 60px;
         }
-
+        
+        /* PC・基本の設定（2列） */
         .char-grid {
             display: grid !important;
-            /* 画面が広いときは「1対1」の2列、狭いときは1列にする設定 */
-            grid-template-columns: 1fr 1fr !important; 
-            gap: 30px !important;
-            width; 100% !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 20px !important;
+            width: 100% !important;
         }
 
-        /* スマホで見るときは1列にしたい場合（レスポンシブ対応） */
-        @media (max-width: 768px) {
-            .char-grid {
-               grid-template-columns: 1fr;
-            }
+        /* スマホ用の設定（ここが重要！） */
+        @media screen and (max-width: 768px) {
+        .char-grid {
+            /* スマホでは「1列」にする */
+           grid-template-columns: 1fr !important; 
+           gap: 15px !important;
         }
+    
+        /* カード自体の横幅を100%にする */
+        .char-card {
+           width: auto !important;
+           margin: 0 !important;
+        }
+        }
+       
 
         .char-card {
             background: rgba(20, 20, 20, 0.8);
